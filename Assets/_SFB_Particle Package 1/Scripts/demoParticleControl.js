@@ -2,7 +2,7 @@
 
 var startPosition		: Vector3		= Vector3(0,1.0,0);		// Where should this particle start?
 var startRotation		: Vector3		= Vector3(0,0,0);		// Rotation should this particle start?
-var shootsTarget		: boolean		= false;				// If true, particle will shoot forward
+var shootsTarget		: boolean		= true;				// If true, particle will shoot forward
 var shootSpeed			: float			= 12.0;					// Multiplier of Time.deltaTime
 
 function Start () {
@@ -10,6 +10,8 @@ function Start () {
 }
 
 function Update () {
-	if (shootsTarget)
+	if (shootsTarget){
+		//transform.Translate (Camera.forward);
 		transform.position.z += shootSpeed * Time.deltaTime;
+		}
 }
