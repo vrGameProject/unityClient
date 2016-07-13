@@ -11,7 +11,7 @@ public class MagicSpellShot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		direction = Camera.main.transform.forward * 0.5f;
-		transform.position = startPosition;
+		transform.position = Camera.main.transform.position;
 		//transform.position = startPosition;
 	}
 	
