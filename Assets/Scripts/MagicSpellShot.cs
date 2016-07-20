@@ -26,9 +26,16 @@ public class MagicSpellShot : MonoBehaviour {
 	*/
 
 	void OnCollisionEnter(Collision col){
+		print ("꿍해써");
+		Destroy (gameObject,0.05f);
+
 		if (col.collider.tag == "Enemy") {
 			print ("꿍해따니까");
-			Destroy (gameObject,0.05f);
+			Destroy (col.collider.gameObject);
+		}
+
+		if (col.collider.tag == "Enemy2") {
+			print ("나두꿍해써");
 		}
 	}
 }
