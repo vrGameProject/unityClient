@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Shooting : MonoBehaviour {
     public SpriteRenderer image;
+    public GameObject cube;
 
     private Vector3 center;
     private float count = 0;
-	// Use this for initialization
-	void Start () {
+    private float t;
+    // Use this for initialization
+    void Start () {
         center = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
 	}
 	
@@ -15,6 +17,13 @@ public class Shooting : MonoBehaviour {
 	void Update () {
         Ray ray = Camera.main.ScreenPointToRay(center);
         RaycastHit hit;
+       
+        t += Time.deltaTime;
+        if (t > 1)
+        {
+            GameObject tp = Instantiate(cube, transform.position, transform.rotation) as GameObject;
+            t = 0;
+        }
 
         if (Physics.Raycast(ray, out hit, 500.0f))
         {
