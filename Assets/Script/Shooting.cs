@@ -4,6 +4,7 @@ using System.Collections;
 public class Shooting : MonoBehaviour {
     public SpriteRenderer image;
     public GameObject cube;
+	public GameObject head;
 
     private Vector3 center;
     private float count = 0;
@@ -19,9 +20,9 @@ public class Shooting : MonoBehaviour {
         RaycastHit hit;
        
         t += Time.deltaTime;
-        if (t > 1)
+        if (t > 0.1f)
         {
-            GameObject tp = Instantiate(cube, transform.position, transform.rotation) as GameObject;
+            GameObject tp = Instantiate(cube, transform.localPosition, head.transform.localRotation) as GameObject;
             t = 0;
         }
 
@@ -40,7 +41,7 @@ public class Shooting : MonoBehaviour {
             else
             {
                 count = 0;
-                image.color = new Color(255, 255, 255);
+                //image.color = new Color(255, 255, 255);
             }
         }
         
