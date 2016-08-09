@@ -25,5 +25,6 @@ public class bullet : MonoBehaviour {
         Debug.Log(coll.gameObject.name);
         Instantiate(spark,coll.gameObject.transform.position,transform.rotation);
         Destroy(this.gameObject);
+        coll.gameObject.GetComponent<Enemy>().hitEnemy();
     }
 }
