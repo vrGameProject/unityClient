@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class bullet : MonoBehaviour {
-    public GameObject cam;
+    public GameObject hand;
+    public GameObject spark;
     private Vector3 direction;
 
 	// Use this for initialization
@@ -11,13 +12,18 @@ public class bullet : MonoBehaviour {
         Destroy(this.gameObject);
     }
 	void Start () {
-        direction = Camera.main.transform.forward;
+        hand = GameObject.Find("LeftGun");
+        direction = hand.transform.forward;
         StartCoroutine(destroyBullet());
 	}
 	
 	// Update is called once per frame
 	void Update () {
         transform.Translate(direction*1);
-       
+    }
+    void OnCollisionEnter(Collision coll){
+        Debug.Log(coll.gameObject.name);
+        Instantiate(spark,coll.gameObject.transform.position,transform.rotation);
+        Destroy(this.gameObject);
     }
 }

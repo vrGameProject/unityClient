@@ -30,7 +30,7 @@ public class Shooting : MonoBehaviour {
             t = 0;
         }
 
-        if (Physics.Raycast(ray, out hit, 500.0f))
+        /*if (Physics.Raycast(ray, out hit, 500.0f))
         {
             if (hit.collider.gameObject.CompareTag("box"))
             {
@@ -47,7 +47,7 @@ public class Shooting : MonoBehaviour {
                 count = 0;
                 //image.color = new Color(255, 255, 255);
             }
-        }
+        }*/
         
 	
 	}
