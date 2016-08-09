@@ -5,6 +5,8 @@ public class Shooting : MonoBehaviour {
     public SpriteRenderer image;
     public GameObject cube;
 	public GameObject head;
+    public GameObject leftGun;
+    public GameObject rightGun;
 
     private Vector3 center;
     private float count = 0;
@@ -22,7 +24,9 @@ public class Shooting : MonoBehaviour {
         t += Time.deltaTime;
         if (t > 0.1f)
         {
-            GameObject tp = Instantiate(cube, transform.localPosition, head.transform.localRotation) as GameObject;
+            GameObject tp = Instantiate(cube, leftGun.transform.position, leftGun.transform.rotation) as GameObject;
+            GameObject tp2 = Instantiate(cube, rightGun.transform.position, rightGun.transform.rotation) as GameObject;
+            //tp.transform.Rotate(head.transform.eulerAngles);
             t = 0;
         }
 
