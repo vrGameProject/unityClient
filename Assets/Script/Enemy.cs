@@ -4,18 +4,23 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 	public int hp = 10;
 	public GameObject explosion;
+	private GameObject player;
+	private bool hitState;
 	private bool B_pattern1;
 	private float posX,posY,posZ;
 	
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(pattern1());
+		player = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(transform.position.y < -1)
 			posY = 0.05f;
+		else if(transform.position.y>20.0f)
+			posY = -0.05f;
 		else if(transform.position.x < -20.0f)
 			posX = 0.05f;
 		else if(transform.position.x>20.0f)
@@ -29,6 +34,12 @@ public class Enemy : MonoBehaviour {
 			B_pattern1 = true;
 			StartCoroutine(pattern1());
 		}*/
+		if(!hitState){
+			Debug.Log(player.transform.position);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), 0.1f);
+			//Quaternion dir = Quaternion.LookRotation(player.transform.position); //바라볼 벡터
+			//transform.rotation = Quaternion.Slerp(transform.rotation, dir, 0.1f);
+		}
 	}
 	IEnumerator pattern1(){
 		float delay;
@@ -43,8 +54,14 @@ public class Enemy : MonoBehaviour {
 			yield return new WaitForSeconds(delay);
 		}
 	}
+	IEnumerator onHitState(){
+		hitState = true;
+		yield return new WaitForSeconds(1.0f);
+		hitState = false;
+	}
 	public void hitEnemy(){
 		hp--;
+		StartCoroutine(onHitState());
 		if(hp<0){
 			Instantiate(explosion,transform.position,transform.rotation);
 			Destroy(this.gameObject);
