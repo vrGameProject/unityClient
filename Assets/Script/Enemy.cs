@@ -16,10 +16,14 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 		if(transform.position.y < -1)
 			posY = 0.05f;
-		if(transform.position.x < -20.0f || transform.position.x>20.0f)
-			posX = transform.position.x * -0.25f;
-		if(transform.position.z < 5.0f)
+		else if(transform.position.x < -20.0f)
+			posX = 0.05f;
+		else if(transform.position.x>20.0f)
+			posX = -0.05f;
+		else if(transform.position.z < 5.0f)
 			posZ = 0.05f;
+		else if(transform.position.z >20.0f)
+			posZ = -0.05f;
 		transform.position = new Vector3(transform.position.x+posX,transform.position.y+posY,transform.position.z+posZ);
 		/*if(!B_pattern1 && transform.position.y < 1.0f){
 			B_pattern1 = true;

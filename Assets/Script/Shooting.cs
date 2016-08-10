@@ -24,8 +24,8 @@ public class Shooting : MonoBehaviour {
         t += Time.deltaTime;
         if (t > 0.1f)
         {
-            GameObject tp = Instantiate(cube, leftGun.transform.position, leftGun.transform.rotation) as GameObject;
-            GameObject tp2 = Instantiate(cube, rightGun.transform.position, rightGun.transform.rotation) as GameObject;
+            GameObject tp = Instantiate(cube, leftGun.transform.position, transform.rotation) as GameObject;
+            GameObject tp2 = Instantiate(cube, rightGun.transform.position, transform.rotation) as GameObject;
             //tp.transform.Rotate(head.transform.eulerAngles);
             t = 0;
         }
