@@ -28,9 +28,9 @@ public class EnemyMove : MonoBehaviour {
 
 			moveTime -= Time.deltaTime;
 
-			print ("time: " + moveTime);
-			print ("rx: " + randomX);
-			print ("rz: " + randomZ);
+			//print ("time: " + moveTime);
+			//print ("rx: " + randomX);
+			//print ("rz: " + randomZ);
 
 			myTrans.position = new Vector3 (myTrans.position.x + randomX, myTrans.transform.position.y, myTrans.position.z + randomZ);
 
@@ -41,8 +41,19 @@ public class EnemyMove : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col){
-		if (col.collider.tag == "MagicSpell") {
+		if ((col.collider.tag == "MagicIce")&&(gameObject.tag == "EnemyIce")) {
 			updateLock = true;
+			print ("Ice 꿍꿍");
+		}
+
+		if ((col.collider.tag == "MagicFire")&&(gameObject.tag == "EnemyFire")) {
+			updateLock = true;
+			print ("Fire 꿍꿍");
+		}
+
+		if ((col.collider.tag == "MagicLight")&&(gameObject.tag == "EnemyLight")) {
+			updateLock = true;
+			print ("Light 꿍꿍");
 		}
 	}
 }

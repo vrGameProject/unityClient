@@ -4,10 +4,11 @@ using System.Collections;
 public class MagicSpellShot : MonoBehaviour {
 	
 	private Vector3 direction;
+	private float speed = 0.5f;
 
 	// Use this for initialization
 	void Start () {
-		direction = Camera.main.transform.forward * 0.5f;
+		direction = Camera.main.transform.forward * speed;
 		transform.position = Camera.main.transform.position;
 		transform.position = new Vector3 (transform.position.x, transform.position.y + 0.2f, +transform.position.z);
 	}
@@ -29,13 +30,19 @@ public class MagicSpellShot : MonoBehaviour {
 		print ("꿍해써");
 		Destroy (gameObject,0.05f);
 
-		if (col.collider.tag == "Enemy") {
-			print ("꿍해따니까");
+		if ((gameObject.tag == "MagicIce")&&(col.collider.tag == "EnemyIce")) {
+			print ("Ice 꿍");
 			Destroy (col.collider.gameObject,2.0f);
 		}
 
-		if (col.collider.tag == "Enemy2") {
-			print ("나두꿍해써");
+		if ((gameObject.tag == "MagicFire")&&(col.collider.tag == "EnemyFire")) {
+			print ("Fire 꿍");
+			Destroy (col.collider.gameObject,2.0f);
+		}
+
+		if ((gameObject.tag == "MagicLight")&&(col.collider.tag == "EnemyLight")) {
+			print ("Light 꿍");
+			Destroy (col.collider.gameObject,2.0f);
 		}
 	}
 }
