@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour {
 		}*/
 		if(!hitState){
 			Debug.Log(player.transform.position);
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), 0.1f);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.localPosition - transform.localPosition), 0.2f);
 			//Quaternion dir = Quaternion.LookRotation(player.transform.position); //바라볼 벡터
 			//transform.rotation = Quaternion.Slerp(transform.rotation, dir, 0.1f);
 		}
@@ -52,6 +52,8 @@ public class Enemy : MonoBehaviour {
 			//posY += Mathf.Clamp (transform.position.y,-0.01f, 0.20f);
 			//posZ += Mathf.Clamp (transform.position.z,0.05f, 0.20f);
 			yield return new WaitForSeconds(delay);
+			posX = posY = posZ = 0;
+			yield return new WaitForSeconds(2.0f);
 		}
 	}
 	IEnumerator onHitState(){

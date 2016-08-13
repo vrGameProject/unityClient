@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class bullet : MonoBehaviour {
+   
+    //public AudioClip shootSound;
     public GameObject hand;
     public GameObject spark;
     private Vector3 direction;
@@ -12,6 +14,8 @@ public class bullet : MonoBehaviour {
         Destroy(this.gameObject);
     }
 	void Start () {
+        //AudioSource.PlayClipAtPoint(shootSound,transform.position);
+        
         hand = GameObject.Find("LeftGun");
         direction = hand.transform.forward;
         StartCoroutine(destroyBullet());
@@ -23,8 +27,9 @@ public class bullet : MonoBehaviour {
     }
     void OnCollisionEnter(Collision coll){
         Debug.Log(coll.gameObject.name);
-        Instantiate(spark,coll.gameObject.transform.position,transform.rotation);
+        Instantiate(spark,transform.position,transform.rotation);
         Destroy(this.gameObject);
-        coll.gameObject.GetComponent<Enemy>().hitEnemy();
+        if(coll.gameObject.tag == "Enemy")
+            coll.gameObject.GetComponent<Enemy>().hitEnemy();
     }
 }

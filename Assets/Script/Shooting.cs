@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Shooting : MonoBehaviour {
+    public AudioClip shootSound;
     public SpriteRenderer image;
     public GameObject cube;
 	public GameObject head;
@@ -14,6 +15,7 @@ public class Shooting : MonoBehaviour {
     // Use this for initialization
     void Start () {
         center = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+        
 	}
 	
 	// Update is called once per frame
@@ -22,8 +24,9 @@ public class Shooting : MonoBehaviour {
         RaycastHit hit;
        
         t += Time.deltaTime;
-        if (t > 0.1f)
+        if (t > 0.08f)
         {
+            AudioSource.PlayClipAtPoint(shootSound,transform.position,0.05f);
             GameObject tp = Instantiate(cube, leftGun.transform.position, transform.rotation) as GameObject;
             GameObject tp2 = Instantiate(cube, rightGun.transform.position, transform.rotation) as GameObject;
             //tp.transform.Rotate(head.transform.eulerAngles);
