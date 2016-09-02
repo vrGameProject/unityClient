@@ -14,8 +14,10 @@ public class PlayerMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(KeyCode.W)){
-			direction = Camera.main.transform.forward * 0.5f;
-			transform.position = Camera.main.transform.position;
+			float y = 0.0f;
+			direction = Camera.main.transform.forward * 0.3f;
+			direction.y = y;
+			//transform.position = Camera.main.transform.position;
 			transform.Translate (direction);
 		}
 	}
