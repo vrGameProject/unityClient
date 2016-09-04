@@ -14,7 +14,7 @@ Library/
 
 Library/metadata
 
-Assets/Plugins
+#Assets/Plugins#
 
 Assets/GoogleVR
 
