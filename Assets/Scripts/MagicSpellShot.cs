@@ -4,6 +4,7 @@ using System.Collections;
 public class MagicSpellShot : MonoBehaviour {
 
 	public GameObject effect;
+	private GameObject deadEffect;
 	private Vector3 direction;
 	private float speed = 0.5f;
 
@@ -46,24 +47,27 @@ public class MagicSpellShot : MonoBehaviour {
 
 		if ((gameObject.tag == "MagicIce")&&(col.collider.tag == "EnemyIce")) {
 			print ("Ice 꿍");
-			Instantiate (effect, col.collider.transform.position, Quaternion.identity);
+			deadEffect = Instantiate (effect, col.collider.transform.position, Quaternion.identity) as GameObject;
 			Destroy (col.collider.gameObject,2.0f);
+			Destroy (deadEffect, 2.0f);
 
 			score.AddScore (scoreValue);
 		}
 
 		if ((gameObject.tag == "MagicFire")&&(col.collider.tag == "EnemyFire")) {
 			print ("Fire 꿍");
-			Instantiate (effect, col.collider.transform.position, Quaternion.identity);
+			deadEffect = Instantiate (effect, col.collider.transform.position, Quaternion.identity) as GameObject;
 			Destroy (col.collider.gameObject,2.0f);
+			Destroy (deadEffect, 2.0f);
 
 			score.AddScore (scoreValue);
 		}
 
 		if ((gameObject.tag == "MagicLight")&&(col.collider.tag == "EnemyLight")) {
 			print ("Light 꿍");
-			Instantiate (effect, col.collider.transform.position, Quaternion.identity);
+			deadEffect = Instantiate (effect, col.collider.transform.position, Quaternion.identity) as GameObject;
 			Destroy (col.collider.gameObject,2.0f);
+			Destroy (deadEffect, 2.0f);
 
 			score.AddScore (scoreValue);
 		}
