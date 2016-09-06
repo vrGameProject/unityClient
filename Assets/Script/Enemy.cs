@@ -2,12 +2,14 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	public int hp = 10;
+	public int hp = 8;
+	public GameObject spark;
 	public GameObject explosion;
 	private GameObject player;
 	private bool hitState;
 	private bool B_pattern1;
 	private bool is_spawned;
+	private bool is_dead;
 	private float posX,posY,posZ;
 
 	private float r;
@@ -22,6 +24,9 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Vector3.Distance(player.transform.position, transform.position) >= 30.5f){
+			DestroyThis(0);
+		}
 		if(is_spawned){
 			transform.position = new Vector3(transform.position.x,transform.position.y+posY,transform.position.z);
 		}else{
@@ -33,7 +38,7 @@ public class Enemy : MonoBehaviour {
 			StartCoroutine(pattern1());
 		}*/
 		if(!hitState){
-			Debug.Log(player.transform.position);
+			//Debug.Log(player.transform.position);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.localPosition - transform.localPosition), 0.2f);
 			//Quaternion dir = Quaternion.LookRotation(player.transform.position); //바라볼 벡터
 			//transform.rotation = Quaternion.Slerp(transform.rotation, dir, 0.1f);
@@ -53,17 +58,17 @@ public class Enemy : MonoBehaviour {
 			posZ = Random.Range(-0.05f,0.05f);
 			delay = Random.Range(2.0f,3.0f);
 			if(transform.position.y < 2)
-				posY = 0.1f;
+				posY = 0.08f;
 			if(transform.position.y>20.0f)
-				posY = -0.1f;
+				posY = -0.08f;
 			if(transform.position.x < -20.0f)
-				posX = 0.1f;
+				posX = 0.08f;
 			if(transform.position.x>20.0f)
-				posX = -0.1f;
+				posX = -0.08f;
 			if(transform.position.z < 5.0f)
-				posZ = 0.1f;
+				posZ = 0.08f;
 			if(transform.position.z >10.0f)
-				posZ = -0.1f;
+				posZ = -0.08f;
 			//posX += Mathf.Clamp (transform.position.x,-0.20f, 0.20f);
 			//posY += Mathf.Clamp (transform.position.y,-0.01f, 0.20f);
 			//posZ += Mathf.Clamp (transform.position.z,0.05f, 0.20f);
@@ -78,12 +83,27 @@ public class Enemy : MonoBehaviour {
 		hitState = false;
 	}
 	public void hitEnemy(){
-		hp--;
-		StartCoroutine(onHitState());
-		if(hp<0){
-			Instantiate(explosion,transform.position,transform.rotation);
-			GameObject.Find("Handler").GetComponent<Handler>().killEnemy();
-			Destroy(this.gameObject);
+		if(hp>0){
+			hp--;
+			StartCoroutine(onHitState());
+		}
+		else if(!is_dead &&hp == 0){
+			DestroyThis(1);
 		}
 	}
+	public void DestroyThis(int n){
+		is_dead = true;
+		Instantiate(explosion,transform.position,transform.rotation);
+		GameObject.Find("Handler").GetComponent<Handler>().killEnemy(n);
+		Destroy(this.gameObject);
+	}
+	/*void OnCollisionEnter(Collision coll){
+        //Debug.Log(coll.gameObject.name);
+        Instantiate(spark,transform.position,transform.rotation);
+        
+        if(coll.gameObject.tag == "Bullet"){
+            hitEnemy();
+			Destroy(coll.gameObject);
+		}
+    }*/
 }

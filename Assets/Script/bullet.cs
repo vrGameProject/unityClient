@@ -26,7 +26,7 @@ public class bullet : MonoBehaviour {
         transform.Translate(direction*1);
     }
     void OnCollisionEnter(Collision coll){
-        Debug.Log(coll.gameObject.name);
+        //Debug.Log(coll.gameObject.name);
         Instantiate(spark,transform.position,transform.rotation);
         Destroy(this.gameObject);
         if(coll.gameObject.tag == "Enemy")
