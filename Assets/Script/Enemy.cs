@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		StartCoroutine(upPattern());
 		player = GameObject.Find("Player");
-		r = Random.Range(3.0f,7.0f);
-		posY = 0.1f;
+		r = Random.Range(4.0f,7.0f);
+		posY = 0.2f;
 	}
 	
 	// Update is called once per frame
@@ -25,18 +25,7 @@ public class Enemy : MonoBehaviour {
 		if(is_spawned){
 			transform.position = new Vector3(transform.position.x,transform.position.y+posY,transform.position.z);
 		}else{
-			if(transform.position.y < -1)
-				posY = 0.05f;
-			else if(transform.position.y>20.0f)
-				posY = -0.05f;
-			else if(transform.position.x < -20.0f)
-				posX = 0.05f;
-			else if(transform.position.x>20.0f)
-				posX = -0.05f;
-			else if(transform.position.z < 5.0f)
-				posZ = 0.05f;
-			else if(transform.position.z >20.0f)
-				posZ = -0.05f;
+			
 			transform.position = new Vector3(transform.position.x+posX,transform.position.y+posY,transform.position.z+posZ);
 		}
 		/*if(!B_pattern1 && transform.position.y < 1.0f){
@@ -63,6 +52,18 @@ public class Enemy : MonoBehaviour {
 			posY = Random.Range(-0.05f,0.05f);
 			posZ = Random.Range(-0.05f,0.05f);
 			delay = Random.Range(2.0f,3.0f);
+			if(transform.position.y < 2)
+				posY = 0.1f;
+			if(transform.position.y>20.0f)
+				posY = -0.1f;
+			if(transform.position.x < -20.0f)
+				posX = 0.1f;
+			if(transform.position.x>20.0f)
+				posX = -0.1f;
+			if(transform.position.z < 5.0f)
+				posZ = 0.1f;
+			if(transform.position.z >10.0f)
+				posZ = -0.1f;
 			//posX += Mathf.Clamp (transform.position.x,-0.20f, 0.20f);
 			//posY += Mathf.Clamp (transform.position.y,-0.01f, 0.20f);
 			//posZ += Mathf.Clamp (transform.position.z,0.05f, 0.20f);
