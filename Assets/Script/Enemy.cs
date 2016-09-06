@@ -7,29 +7,38 @@ public class Enemy : MonoBehaviour {
 	private GameObject player;
 	private bool hitState;
 	private bool B_pattern1;
+	private bool is_spawned;
 	private float posX,posY,posZ;
+
+	private float r;
 	
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(pattern1());
+		StartCoroutine(upPattern());
 		player = GameObject.Find("Player");
+		r = Random.Range(3.0f,7.0f);
+		posY = 0.1f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(transform.position.y < -1)
-			posY = 0.05f;
-		else if(transform.position.y>20.0f)
-			posY = -0.05f;
-		else if(transform.position.x < -20.0f)
-			posX = 0.05f;
-		else if(transform.position.x>20.0f)
-			posX = -0.05f;
-		else if(transform.position.z < 5.0f)
-			posZ = 0.05f;
-		else if(transform.position.z >20.0f)
-			posZ = -0.05f;
-		transform.position = new Vector3(transform.position.x+posX,transform.position.y+posY,transform.position.z+posZ);
+		if(is_spawned){
+			transform.position = new Vector3(transform.position.x,transform.position.y+posY,transform.position.z);
+		}else{
+			if(transform.position.y < -1)
+				posY = 0.05f;
+			else if(transform.position.y>20.0f)
+				posY = -0.05f;
+			else if(transform.position.x < -20.0f)
+				posX = 0.05f;
+			else if(transform.position.x>20.0f)
+				posX = -0.05f;
+			else if(transform.position.z < 5.0f)
+				posZ = 0.05f;
+			else if(transform.position.z >20.0f)
+				posZ = -0.05f;
+			transform.position = new Vector3(transform.position.x+posX,transform.position.y+posY,transform.position.z+posZ);
+		}
 		/*if(!B_pattern1 && transform.position.y < 1.0f){
 			B_pattern1 = true;
 			StartCoroutine(pattern1());
@@ -40,6 +49,12 @@ public class Enemy : MonoBehaviour {
 			//Quaternion dir = Quaternion.LookRotation(player.transform.position); //바라볼 벡터
 			//transform.rotation = Quaternion.Slerp(transform.rotation, dir, 0.1f);
 		}
+		
+	}
+	IEnumerator upPattern(){
+		yield return new WaitUntil(()=>transform.position.y > r);
+		is_spawned = false;
+		StartCoroutine(pattern1());
 	}
 	IEnumerator pattern1(){
 		float delay;
@@ -66,6 +81,7 @@ public class Enemy : MonoBehaviour {
 		StartCoroutine(onHitState());
 		if(hp<0){
 			Instantiate(explosion,transform.position,transform.rotation);
+			GameObject.Find("Handler").GetComponent<Handler>().killEnemy();
 			Destroy(this.gameObject);
 		}
 	}
