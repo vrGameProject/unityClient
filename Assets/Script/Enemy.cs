@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	public int hp = 8;
+	public int hp = 1;
 	public GameObject spark;
 	public GameObject explosion;
 	private GameObject player;

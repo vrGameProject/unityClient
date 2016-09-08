@@ -23,7 +23,7 @@ public class bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(direction*1);
+        transform.Translate(direction*1.5f);
     }
     void OnCollisionEnter(Collision coll){
         //Debug.Log(coll.gameObject.name);
