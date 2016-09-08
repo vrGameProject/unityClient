@@ -215,10 +215,8 @@ public class GrabbingHand : MonoBehaviour
         Hover();
     }
 
-    protected PinchState GetNewPinchState()
+    protected PinchState GetNewPinchState(HandModel hand_model, Hand leap_hand)
     {
-        HandModel hand_model = GetComponent<HandModel>();
-        Hand leap_hand = hand_model.GetLeapHand();
 
         Vector leap_thumb_tip = leap_hand.Fingers[0].TipPosition;
         float closest_distance = Mathf.Infinity;
@@ -339,7 +337,7 @@ public class GrabbingHand : MonoBehaviour
         if (leap_hand == null)
             return;
 
-        PinchState new_pinch_state = GetNewPinchState();
+        PinchState new_pinch_state = GetNewPinchState(hand_model, leap_hand);
         if (pinch_state_ == PinchState.kPinched)
         {
             if (new_pinch_state == PinchState.kReleased)

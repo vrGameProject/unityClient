@@ -5,58 +5,47 @@ using Leap;
 // 
 public class PalmFrontTrigger : MonoBehaviour {
 
-    public Transform handParentTransform;
+    // Ratio of the length of the proximal bone of the thumb that will trigger a pinch.
+    public float facingTriggerAngle = 45.0f;
+    private Vector3 criteriaAngle = new Vector3(280, 0, 0);
+
+    public Transform parent_transform;
     public GUIText guiTxt;
-
-    private Vector3 palm_position;
-    private Vector3 palm_rotation;
-
-    private Vector[] finger_positions;
-    private Vector3 thumb_position;
-    private Vector3 index_position;
-    private Vector3 middle_position;
-    private Vector3 ring_position;
-    private Vector3 pinky_position;
 
     // Use this for initialization
     void Start ()
     {
-        finger_positions = new Vector[5];
+
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
+    }
+
+    void FixedUpdate ()
+    {
         HandModel hand_model = GetComponent<HandModel>();
         Hand leap_hand = hand_model.GetLeapHand();
 
-        palm_position = hand_model.GetPalmPosition() - handParentTransform.position;
-        palm_rotation = hand_model.GetPalmRotation().eulerAngles - handParentTransform.eulerAngles;
+        if (leap_hand == null)
+            return;
+
+        Vector3 diff;
+        Vector3 palm_rotation;
         
-        for (int i = 0; i < 5; i++)
-        {
-            finger_positions[i] = leap_hand.Fingers[i].TipPosition;
-        }
+        palm_rotation = hand_model.GetPalmRotation().eulerAngles - parent_transform.eulerAngles;
 
-        guiTxt.text = "palm position : (" +
-            palm_position.x + ", " +
-            palm_position.y + ", " +
-            palm_position.z +
-            ")\n palm rotation : (" +
-            palm_rotation.x + ", " +
-            palm_rotation.y + ", " +
-            palm_rotation.z +")";
+        diff = palm_rotation - criteriaAngle;
 
-        for (int i = 0; i < 5; i++)
-        {
-            guiTxt.text += "\n finger " + i + " : (" +
-                finger_positions[i].x + ", " +
-                finger_positions[i].y + ", " +
-                finger_positions[i].z + ")";
-        }
-    }
+        diff.x = Mathf.Abs(diff.x);
+        diff.y = Mathf.Abs(diff.y);
+        diff.z = Mathf.Abs(diff.z);
 
-    void FixedUpdate () {
-
+        if (Mathf.Abs(diff.x) < facingTriggerAngle && Mathf.Abs(diff.y) < facingTriggerAngle)
+            guiTxt.text = "facing";
+        else
+            guiTxt.text = "not facing";
     }
 }
