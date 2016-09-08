@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	private int score;
 	public static bool scoreInitLock = true;
 
-	private static int totalTime = 10;
+	private static int totalTime = 60;
 	public Text timeText;
 	private int time = totalTime;
 	private GameObject[] gameObjects1;
