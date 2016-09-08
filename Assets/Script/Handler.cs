@@ -22,9 +22,11 @@ public class Handler : MonoBehaviour {
 	void Start () {
 		//AudioSource.PlayClipAtPoint(bgm,transform.position);
 		
+		
+	}
+	public void init(){
 		StartCoroutine(spawn());
 	}
-	
 	// Update is called once per frame
 	void Update () {
 	}
@@ -33,6 +35,7 @@ public class Handler : MonoBehaviour {
 
 		while(true){
 			Debug.Log("spawn");
+			yield return new WaitForSeconds(3.0f);
 			killPoint = numOfEnemy;
 			for(int i =0;i<numOfEnemy;i++){
 				posX = Random.Range(-10.0f,10.0f);
@@ -40,7 +43,7 @@ public class Handler : MonoBehaviour {
 			}
 			yield return new WaitUntil(()=>killPoint <= 0);
 			numOfEnemy++;
-			yield return new WaitForSeconds(3.0f);
+			
 		}
 	}
 	public void killEnemy(int n){

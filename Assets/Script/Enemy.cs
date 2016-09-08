@@ -93,7 +93,8 @@ public class Enemy : MonoBehaviour {
 	}
 	public void DestroyThis(int n){
 		is_dead = true;
-		Instantiate(explosion,transform.position,transform.rotation);
+		if(n == 1)
+			Instantiate(explosion,transform.position,transform.rotation);
 		GameObject.Find("Handler").GetComponent<Handler>().killEnemy(n);
 		Destroy(this.gameObject);
 	}
