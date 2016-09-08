@@ -8,7 +8,7 @@ public class MagicSpellShot : MonoBehaviour {
 	private Vector3 direction;
 	private float speed = 0.5f;
 
-	private Score score;
+	private GameManager score;
 	public int scoreValue;
 
 	// Use this for initialization
@@ -21,7 +21,7 @@ public class MagicSpellShot : MonoBehaviour {
 		GameObject gameControllerObject = GameObject.FindWithTag ("Score");
 		if (gameControllerObject != null)
 		{
-			score = gameControllerObject.GetComponent <Score>();
+			score = gameControllerObject.GetComponent <GameManager>();
 		}
 		if (score == null)
 		{
@@ -33,6 +33,11 @@ public class MagicSpellShot : MonoBehaviour {
 	void Update () {
 		Destroy (gameObject, 3);
 		transform.Translate (direction);
+
+		if (GameManager.scoreInitLock == false) {
+			score.initScore ();
+			GameManager.scoreInitLock = true;
+		}
 	}
 
 	void onTriggerEnter(Collider col){
