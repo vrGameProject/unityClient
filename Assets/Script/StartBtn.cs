@@ -4,7 +4,7 @@ using System.Collections;
 public class StartBtn : MonoBehaviour {
 	public GameObject highScoreBoard;
 	public GameObject scoreBoard;
-	private bool is_started;
+	static public bool is_started;
 	// Use this for initialization
 	void Start () {
 	
@@ -23,5 +23,10 @@ public class StartBtn : MonoBehaviour {
 			highScoreBoard.SetActive(false);
 			
 		}
+	}
+	public void Gameover(){
+		Debug.Log("Gameover");
+		highScoreBoard.SetActive(true);
+		scoreBoard.SetActive(false);
 	}
 }
