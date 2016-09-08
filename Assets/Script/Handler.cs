@@ -32,6 +32,7 @@ public class Handler : MonoBehaviour {
 	public void init(){
 		
 		//Debug.Log(PlayerPrefs.GetInt("highScore"));
+		numOfEnemy = 3;
 		score = 0;
 		scoreText.text = score.ToString();
 		StartCoroutine("spawn");

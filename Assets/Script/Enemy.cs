@@ -18,13 +18,13 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		StartCoroutine(upPattern());
 		player = GameObject.Find("Player");
-		r = Random.Range(4.0f,7.0f);
+		r = Random.Range(2.0f,5.0f);
 		posY = 0.2f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance(player.transform.position, transform.position) >= 30.5f){
+		if (Vector3.Distance(player.transform.position, transform.position) >= 40.5f){
 			DestroyThis(0);
 		}
 		if(is_spawned){
@@ -65,9 +65,9 @@ public class Enemy : MonoBehaviour {
 				posX = 0.08f;
 			if(transform.position.x>20.0f)
 				posX = -0.08f;
-			if(transform.position.z < 5.0f)
+			if(transform.position.z < 10.0f)
 				posZ = 0.08f;
-			if(transform.position.z >10.0f)
+			if(transform.position.z >15.0f)
 				posZ = -0.08f;
 			//posX += Mathf.Clamp (transform.position.x,-0.20f, 0.20f);
 			//posY += Mathf.Clamp (transform.position.y,-0.01f, 0.20f);
