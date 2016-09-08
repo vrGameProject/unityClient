@@ -43,6 +43,9 @@ public class MagicSpellControl : MonoBehaviour {
 				Instantiate(Goong, transform.position, transform.rotation);
 				waitTime = TIME_VAL;
 			}
+
+			Instantiate (MagicIceBall, transform.position, transform.rotation);
+			waitTime = TIME_VAL;
 		}
 	}
 }
