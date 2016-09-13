@@ -35,19 +35,22 @@ public class MagicSpellControl : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.A) || magic == MAGIC_ICEBALL) {
 				//print ("ICEBALL AAA");
 
-				Instantiate (EffectSound);
+				Object t = Instantiate (EffectSound);
+				Destroy (t, 2.0f);
 				Instantiate (MagicIceBall, transform.position, transform.rotation);
 				waitTime = TIME_VAL;
 			} else if (Input.GetKeyDown(KeyCode.S) || magic == MAGIC_FIREBALL) {
 				//print ("FIREBEAM SSS");
 
-				Instantiate (EffectSound);
+				Object t = Instantiate (EffectSound);
+				Destroy (t, 2.0f);
 				Instantiate(FireBeam, transform.position, transform.rotation);
 				waitTime = TIME_VAL;
 			} else if (Input.GetKeyDown(KeyCode.D) || magic == MAGIC_LIGHTBALL) {
 				//print ("PlasmaLight DDD");
 
-				Instantiate (EffectSound);
+				Object t = Instantiate (EffectSound);
+				Destroy (t, 2.0f);
 				Instantiate(PlasmaLight, transform.position, transform.rotation);
 				waitTime = TIME_VAL;
 			}
