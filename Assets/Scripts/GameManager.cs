@@ -4,16 +4,26 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+	public static GameManager singletonInstance = null;
+
+	public Button restartButton;
+
 	public Text scoreText;
 	private int score;
 	public static bool scoreInitLock = true;
 
-	private static int totalTime = 180;
+	private static int totalTime = 120;
 	public Text timeText;
 	private int time = totalTime;
 	private GameObject[] gameObjects1;
 	private GameObject[] gameObjects2;
 	private GameObject[] gameObjects3;
+
+	private bool isRestart = false;
+
+	void Awake () {
+		singletonInstance = this;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +34,13 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (time==0 && Input.GetKeyDown (KeyCode.R)) {
+
+		if (time==0 && (Input.GetKeyDown (KeyCode.R) || isRestart)) {
 			EnemySpawn.spawnLock = false;
 			scoreInitLock = false;
 			time = totalTime;
 			StartCoroutine (timer());
+			isRestart = false;
 		}
 	}
 
@@ -85,5 +97,9 @@ public class GameManager : MonoBehaviour {
 		}
 
 		EnemySpawn.spawnLock = true;
+	}
+
+	public void Restart() {
+		this.isRestart = true;
 	}
 }
