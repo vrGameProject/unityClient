@@ -4,7 +4,7 @@ using System.Collections;
 public class bullet : MonoBehaviour {
    
     //public AudioClip shootSound;
-    public GameObject hand;
+    public GameObject head;
     public GameObject spark;
     private Vector3 direction;
 
@@ -17,15 +17,18 @@ public class bullet : MonoBehaviour {
 	void Start () {
         //AudioSource.PlayClipAtPoint(shootSound,transform.position);
         
-        hand = GameObject.Find("LeftGun");
-        direction = hand.transform.forward;
+        head = GameObject.Find("Gun");
+
         //StartCoroutine(destroyBullet());
 	}
-	
+	public void setDirection(Vector3 direction){
+		this.direction = direction;
+	}
+		
 	// Update is called once per frame
 	void Update () {
         transform.Translate(direction*1.5f);
-		if(Vector3.Distance(hand.transform.position,transform.position) > 45.0f){
+		if(Vector3.Distance(head.transform.position,transform.position) > 45.0f){
 			GameObject.Find ("Player").GetComponent<Shooting> ().bulletEnqueue (this.gameObject);
 		}
     }
