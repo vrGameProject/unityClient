@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour {
     public GameObject cube;
 	public GameObject head;
     public GameObject leftGun;
+	public GameObject Gun;
 	public GameObject Palm;
     //public GameObject rightGun;
 
@@ -31,7 +32,7 @@ public class Shooting : MonoBehaviour {
        
         t += Time.deltaTime;
 		if (Palm.activeSelf && t > 0.08f) {
-			leftGun.SetActive (true);
+			Gun.SetActive (true);
 			AudioSource.PlayClipAtPoint (shootSound, transform.position, 0.05f);
 			GameObject bullet = bullets.Dequeue () as GameObject;
 			bullet.transform.position = leftGun.transform.position;
@@ -42,7 +43,7 @@ public class Shooting : MonoBehaviour {
 			//tp.transform.Rotate(head.transform.eulerAngles);
 			t = 0;
 		} else {
-			leftGun.SetActive (false);
+			Gun.SetActive (false);
 		}
 
         /*if (Physics.Raycast(ray, out hit, 500.0f))
