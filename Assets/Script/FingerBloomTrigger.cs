@@ -4,6 +4,9 @@ using Leap;
 
 public class FingerBloomTrigger : MonoBehaviour {
 
+    private GameManager gameManager_;
+    private bool flag;
+
     private MagicSpellControl magicSpellControl_;
     // Ratio of the length of the proximal bone of the thumb that will trigger a pinch.
     public float pinchTriggerDistance = 0.8f;
@@ -22,7 +25,10 @@ public class FingerBloomTrigger : MonoBehaviour {
     protected BloomState bloom_state_;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        flag = false;
+        gameManager_ = GameManager.singletonInstance;
         magicSpellControl_ = MagicSpellControl.singletonInstance;
         bloom_state_ = BloomState.Bloomed;
 	}
@@ -40,10 +46,6 @@ public class FingerBloomTrigger : MonoBehaviour {
     private void OnTriggerPoint()
     {
         magicSpellControl_.setMaigc(MagicSpellControl.MAGIC_ICEBALL);
-    }
-
-    private void OnTriggerMiddle()
-    {
     }
 
     private void OnTriggerBloom()
@@ -125,27 +127,25 @@ public class FingerBloomTrigger : MonoBehaviour {
         {
             case BloomState.Pinched:
                 OnTriggerPinch();
+                if (gameManager_.isPause() && bloom_state_ == BloomState.Bloomed && !flag)
+                {
+                    flag = true;
+                }
                 break;
             case BloomState.Pointed:
                 OnTriggerPoint();
                 break;
-            case BloomState.Middled:
-                OnTriggerMiddle();
-                break;
             case BloomState.Bloomed:
                 OnTriggerBloom();
+                if (gameManager_.isPause() && bloom_state_ != BloomState.Bloomed && flag)
+                {
+                    flag = false;
+                    GameManager.singletonInstance.Restart();
+                }
                 break;
             default:
                 break;
         }
         bloom_state_ = new_bloom_state;
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.name.Equals("RigidHand"))
-        {
-            OnTriggerClap();
-        }
     }
 }

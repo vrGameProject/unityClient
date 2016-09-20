@@ -8,6 +8,8 @@ public class MagicSpellControl : MonoBehaviour {
 
 	public static MagicSpellControl singletonInstance = null;
 
+    public GameManager gameManager_;
+
 	public GameObject MagicIceBall;
 	public GameObject FireBeam;
 	public GameObject PlasmaLight;
@@ -26,12 +28,13 @@ public class MagicSpellControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		magic = 0;
+        gameManager_ = GameManager.singletonInstance;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		waitTime -= Time.deltaTime;
-		if (waitTime < 0.0f) {
+		if (waitTime < 0.0f && !gameManager_.isPause()) {
 			if (Input.GetKeyDown(KeyCode.A) || magic == MAGIC_ICEBALL) {
 				//print ("ICEBALL AAA");
 

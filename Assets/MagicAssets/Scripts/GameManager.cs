@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour {
 	private int score;
 	public static bool scoreInitLock = true;
 
-	private static int totalTime = 10;
+	public int totalTime = 60;
 	public Text timeText;
-	private int time = totalTime;
+    private int time;
 	private GameObject[] gameObjects1;
 	private GameObject[] gameObjects2;
 	private GameObject[] gameObjects3;
@@ -101,5 +101,10 @@ public class GameManager : MonoBehaviour {
 
 	public void Restart() {
 		this.isRestart = true;
-	}
+    }
+
+    public bool isPause()
+    {
+        return time == 0;
+    }
 }
