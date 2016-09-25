@@ -35,7 +35,7 @@ public class GameSelect : MonoBehaviour {
 		switch(selectedGameBtn){
 			case "Btn1": sceneName = "Shooting";resetBtn(); btns[0].GetComponent<Image>().color = new Color(255,255,255); imgs[0].GetComponent<Image>().color = new Color(240,255,244);break;
 			case "Btn2": sceneName = "magicMain";resetBtn(); btns[1].GetComponent<Image>().color = new Color(255,255,255); imgs[1].GetComponent<Image>().color = new Color(240,255,244);break;
-			case "Btn3": resetBtn(); btns[2].GetComponent<Image>().color = new Color(255,255,255); imgs[2].GetComponent<Image>().color = new Color(240,255,244);break;
+			case "Btn3": sceneName = "BlockTower";resetBtn(); btns[2].GetComponent<Image>().color = new Color(255,255,255); imgs[2].GetComponent<Image>().color = new Color(240,255,244);break;
 			case "Btn4": resetBtn(); btns[3].GetComponent<Image>().color = new Color(255,255,255); imgs[3].GetComponent<Image>().color = new Color(240,255,244);break;
 			default : resetBtn();break;
 		}
